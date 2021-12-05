@@ -1,9 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
+import { connect } from "react-redux";
+import { createStream } from "../../actions";
+
 // watch("title") -> form controlled the title input
 // errors -> for handle of all errors on form
-const StreamCreate = () => {
+const StreamCreate = ({ createStream, ...props }) => {
+  console.log(props);
   const {
     register,
     handleSubmit,
@@ -12,8 +16,9 @@ const StreamCreate = () => {
   } = useForm();
 
   const onSubmit = (formData) => {
-    console.log(formData);
+    createStream(formData);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="ui form">
       <div className={`field ${errors.title ? "error" : ""}`}>
@@ -31,4 +36,8 @@ const StreamCreate = () => {
   );
 };
 
-export default StreamCreate;
+const mapStateToProps = (state, ownProps) => {
+  return { state };
+};
+
+export default connect(mapStateToProps, { createStream })(StreamCreate);
