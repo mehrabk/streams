@@ -22,16 +22,18 @@ export const signOut = () => {
   };
 };
 
-export const createStream = (formData) => {
-  return async (dispatch, getState) => {
-    const response = await request.post("/streams", formData);
-    dispatch({ type: CREATE_STREAM, payload: response.data });
-  };
-};
-
 export const fetchStreams = () => async (dispatch) => {
   const response = await request.get("/streams");
   dispatch({ type: FETCH_STREAMS, payload: response.data });
+};
+
+export const createStream = (formData, progNav) => {
+  return async (dispatch, getState) => {
+    const { userId } = getState().auth;
+    const response = await request.post("/streams", { ...formData, userId });
+    dispatch({ type: CREATE_STREAM, payload: response.data });
+    progNav("/");
+  };
 };
 
 export const fetchStream = (id) => async (dispatch) => {
@@ -39,9 +41,10 @@ export const fetchStream = (id) => async (dispatch) => {
   dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
-export const editStream = (id, formData) => async (dispatch) => {
-  const response = await request.put(`/streams/${id}`, formData);
+export const editStream = (id, formData, progNav) => async (dispatch) => {
+  const response = await request.patch(`/streams/${id}`, formData);
   dispatch({ type: EDIT_STREAM, payload: response.data });
+  progNav("/");
 };
 
 export const deleteStream = (id) => async (dispatch) => {
