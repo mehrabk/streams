@@ -47,7 +47,8 @@ export const editStream = (id, formData, progNav) => async (dispatch) => {
   progNav("/");
 };
 
-export const deleteStream = (id) => async (dispatch) => {
+export const deleteStream = (id, progNav) => async (dispatch) => {
   await request.delete(`/streams/${id}`);
   dispatch({ type: DELETE_STREAM, payload: id });
+  progNav("/");
 };

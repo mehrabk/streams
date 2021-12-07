@@ -17,8 +17,8 @@ export default function App() {
           <Route path="/" element={<StreamList />} />
           <Route path="/streams/new" element={<StreamCreate />} />
           <Route path="/streams/edit/:id" element={<StreamEdit />} />
-          <Route path="/streams/delete" element={<StreamDelete />} />
-          <Route path="/streams/show" element={<StreamShow />} />
+          <Route path="/streams/delete/:id" element={<StreamDelete />} />
+          <Route path="/streams/:id" element={<StreamShow />} />
           <Route
             path="*"
             element={<main style={{ padding: "1rem" }}>There`s nothing here!</main>}

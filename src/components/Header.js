@@ -7,12 +7,12 @@ export default function Header() {
   return (
     <div className="ui secondary pointing menu">
       <NavLink to="/" className="item">
-        Stream
+        Streamy
       </NavLink>
 
       <div className="right menu">
         <NavLink to="/" className="item">
-          All Strems
+          All Streams
         </NavLink>
         <GoogleAuth />
       </div>
